@@ -12,10 +12,9 @@ from pheed.feedreader import FeedReader
 class AtomReader (FeedReader):
 	
 	def parseDocument(self,document,limit=None):
-		feeds = document.getElementsByTagName("feed")
-		if len(feeds) <= 0:
+		root = document.getElementByTagName("feed")
+		if root.tagName == None:
 			return None
-		root = feeds[0]
 		feed = Feed()
 		feed.title = root.tagValue("title")
 		feed.url = root.getElementWithAttribute("link","rel","alternate").getAttribute("href")

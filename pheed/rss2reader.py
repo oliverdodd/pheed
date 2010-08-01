@@ -16,10 +16,9 @@ class RSS2Reader (FeedReader):
 	dateFormat = "%a, %d %b %Y %H:%M:%S %z"
 	
 	def parseDocument(self,document,limit=None):
-		feeds = document.getElementsByTagName("rss")
-		if len(feeds) <= 0:
+		root = document.getElementByTagName("rss").getElementByTagName("channel")
+		if root.tagName == None:
 			return None
-		root = feeds[0].getElementsByTagName("channel")[0]
 		feed = Feed()
 		feed.title = root.tagValue("title")
 		feed.url = root.tagValue("link")

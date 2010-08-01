@@ -1,6 +1,6 @@
 import xml.dom.minidom
 """
-Extend DOM Element
+Extend DOM Element and DOM Document
 """
 def textValue(self):
 	return "".join([e.nodeValue for e in self.childNodes])
@@ -10,6 +10,7 @@ def getElementByTagName(self,tag):
 	for e in self.getElementsByTagName(tag):
 		return e
 	return xml.dom.minidom.Element(None)
+xml.dom.minidom.Document.getElementByTagName = getElementByTagName
 xml.dom.minidom.Element.getElementByTagName = getElementByTagName
 
 def getElementWithAttribute(self,tag,attribute,attributeValue):
