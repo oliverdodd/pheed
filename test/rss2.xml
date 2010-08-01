@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+
+	<channel>
+		<title>c01001111de</title>
+		<atom:link href="http://01001111.net/code/?feed=rss2" rel="self"
+			type="application/rss+xml" />
+		<link>http://01001111.net/code</link>
+		<description></description>
+		<lastBuildDate>Wed, 19 May 2010 02:16:52 +0000</lastBuildDate>
+		<generator>http://wordpress.org/?v=2.9.2</generator>
+		<language>en</language>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+		<item>
+			<title>Synchronous NSTask</title>
+			<link>http://01001111.net/code/?p=159</link>
+			<comments>http://01001111.net/code/?p=159#comments</comments>
+			<pubDate>Wed, 19 May 2010 02:16:52 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[Uncategorized]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=159</guid>
+			<description><![CDATA[The NSTask class allows developers to run another program from within a Cocoa Application and monitor its execution without sharing memory space.  By nature it is asynchronous but there are times when you may wish to run the task and halt the execution of your current application until the subprocess has finished.  One [...]]]></description>
+			<content:encoded><![CDATA[<p>The <strong>NSTask</strong> class allows developers to run another program from within a Cocoa Application and monitor its execution without sharing memory space.  By nature it is asynchronous but there are times when you may wish to run the task and halt the execution of your current application until the subprocess has finished.  One example would be during the saving of a file.</p>
+<p>When using the save file hooks provided by Cocoa, you write a file to a temporary location and return a boolean indicating the success of the write operation which tells the framework to move the file to its target location.  If your write operation relies on the execution of an external program, a shell script for instance, then you will want to wait for the execution to complete before indicating the success of the write to the caller.</p>
+<p>One way to accomplish this synchronous execution is to set up an <strong>NSPipe</strong>, a one-way communications channel between processes; one process writes data, the other reads it.  Set the standard out and standard error of the NSTask to the pipe and, after launching the task, read from the pipe until the process ends.  </p>
+<p><script src="http://gist.github.com/405835.js"></script></p>
+<p>This will allow you to both run the task synchronously and return the output to the caller for analysis.</p>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D159&title=Synchronous+NSTask'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D159&title=Synchronous+NSTask'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=159
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>combine + compress</title>
+			<link>http://01001111.net/code/?p=141</link>
+			<comments>http://01001111.net/code/?p=141#comments</comments>
+			<pubDate>Sun, 27 Dec 2009 19:09:19 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[css]]></category>
+			<category><![CDATA[html]]></category>
+			<category><![CDATA[javascript]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=141</guid>
+			<description><![CDATA[YUI Compressor is a popular tool that allows web developers to easily and reliably minify / munge Javascript and CSS files.  The one common complaint amongst users is that it doesn&#8217;t allow you to combine files into a consolidated package prior to minification.  As I discussed a while back, JAWR takes care of [...]]]></description>
+			<content:encoded><![CDATA[<p><a href="http://developer.yahoo.com/yui/compressor/">YUI Compressor</a> is a popular tool that allows web developers to easily and reliably minify / munge Javascript and CSS files.  The one common complaint amongst users is that it doesn&#8217;t allow you to combine files into a consolidated package prior to minification.  As I discussed a while back, JAWR takes care of this automatically for Java based web apps but automated solutions aren&#8217;t very efficient for small, script-based web apps.  Hence, I wrote a small shell script that will combined a list of files into one and then run them through the yuicompressor.</p>
+<p>Now, before you run the script, you either need to move the <b>yuicompressor.jar</b> to <b>/usr/share/yui/yuicompressor.jar</b> or just edit the first line of the script to point to the location of your yuicompressor jar file.</p>
+<p>yuicompress.sh</p>
+<pre class="code"><span class="syntax0"><span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">yuicompress</span>
+<span class="syntax-COMMENT1">#</span>
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">combine</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">files</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">and</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">then</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">compress</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">the</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">result</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">with</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">yuicompressor</span>
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">note:</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">yuicompressor</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">jar</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">must</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">be</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">at</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">/usr/share/yui/yuicompressor.jar</span>
+<span class="syntax-COMMENT1">#</span>
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">usage:</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">yuicompress</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">[-o</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">outfile]</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">[-t</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">type]</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">args</span>
+
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">check</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">for</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">yui</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">compressor</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">-----------------------------------------------------</span>
+<span class="syntax-KEYWORD2">yuipath</span><span class="syntax-OPERATOR">=</span><span class="syntax-LITERAL1">&quot;</span><span class="syntax-LITERAL1">/</span><span class="syntax-LITERAL1">usr</span><span class="syntax-LITERAL1">/</span><span class="syntax-LITERAL1">share</span><span class="syntax-LITERAL1">/</span><span class="syntax-LITERAL1">yui</span><span class="syntax-LITERAL1">/</span><span class="syntax-LITERAL1">yuicompressor</span><span class="syntax-LITERAL1">.</span><span class="syntax-LITERAL1">jar</span><span class="syntax-LITERAL1">&quot;</span>
+<span class="syntax-KEYWORD1">if</span> <span class="syntax-OPERATOR">!</span> test -f <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">yuipath</span>
+<span class="syntax-KEYWORD1">then</span>
+        echo <span class="syntax-LITERAL1">&quot;</span><span class="syntax-LITERAL1">cannot</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">find</span><span class="syntax-LITERAL1"> </span><span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">yuipath</span><span class="syntax-LITERAL1">&quot;</span>
+        exit
+<span class="syntax-KEYWORD1">fi</span>
+
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">get</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">options</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">------------------------------------------------------------------</span>
+<span class="syntax-KEYWORD2">ofile</span><span class="syntax-OPERATOR">=</span><span class="syntax-LITERAL1">&quot;</span><span class="syntax-LITERAL1">compressed</span><span class="syntax-LITERAL1">.</span><span class="syntax-LITERAL1">txt</span><span class="syntax-LITERAL1">&quot;</span>
+<span class="syntax-KEYWORD2">type</span><span class="syntax-OPERATOR">=</span><span class="syntax-LITERAL1">&quot;</span><span class="syntax-LITERAL1">js</span><span class="syntax-LITERAL1">&quot;</span>
+<span class="syntax-KEYWORD2">preserveLicense</span><span class="syntax-OPERATOR">=</span>false
+<span class="syntax-KEYWORD1">while</span> getopts <span class="syntax-LITERAL1">'</span><span class="syntax-LITERAL1">o:t:</span><span class="syntax-LITERAL1">'</span> OPTION
+<span class="syntax-KEYWORD1">do</span>
+        <span class="syntax-KEYWORD1">case</span> <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">OPTION</span> <span class="syntax-KEYWORD1">in</span>
+        o<span class="syntax-OPERATOR">)</span>      <span class="syntax-KEYWORD2">ofile</span><span class="syntax-OPERATOR">=</span><span class="syntax-LITERAL1">&quot;</span><span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">OPTARG</span><span class="syntax-LITERAL1">&quot;</span>
+                <span class="syntax-OPERATOR">;;</span>
+        t<span class="syntax-OPERATOR">)</span>      <span class="syntax-KEYWORD2">type</span><span class="syntax-OPERATOR">=</span><span class="syntax-LITERAL1">&quot;</span><span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">OPTARG</span><span class="syntax-LITERAL1">&quot;</span>
+                <span class="syntax-OPERATOR">;;</span>
+        ?<span class="syntax-OPERATOR">)</span>      printf <span class="syntax-LITERAL1">&quot;</span><span class="syntax-LITERAL1">Usage</span><span class="syntax-LITERAL1">:</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">%</span><span class="syntax-LITERAL1">s</span><span class="syntax-LITERAL1">:</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">[</span><span class="syntax-LITERAL1">-</span><span class="syntax-LITERAL1">o</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">outfile</span><span class="syntax-LITERAL1">]</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">[</span><span class="syntax-LITERAL1">-</span><span class="syntax-LITERAL1">t</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">type</span><span class="syntax-LITERAL1">]</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">args\n</span><span class="syntax-LITERAL1">&quot;</span> <span class="syntax-KEYWORD2">$</span><span class="syntax-OPERATOR">(</span>basename <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">0</span><span class="syntax-OPERATOR">)</span> <span class="syntax-OPERATOR">&gt;</span><span class="syntax-OPERATOR">&amp;</span><span class="syntax-DIGIT">2</span>
+                exit <span class="syntax-DIGIT">2</span>
+                <span class="syntax-OPERATOR">;;</span>
+        <span class="syntax-KEYWORD1">esac</span>
+<span class="syntax-KEYWORD1">done</span>
+shift <span class="syntax-KEYWORD2">$</span><span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">(</span><span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">OPTIND</span> - <span class="syntax-DIGIT">1</span><span class="syntax-OPERATOR">)</span><span class="syntax-OPERATOR">)</span>
+
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">get</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">files</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">--------------------------------------------------------------------</span>
+<span class="syntax-KEYWORD1">if</span> <span class="syntax-OPERATOR">(</span><span class="syntax-OPERATOR">(</span> <span class="syntax-KEYWORD2">$#</span> <span class="syntax-OPERATOR">&lt;</span> <span class="syntax-DIGIT">1</span> <span class="syntax-OPERATOR">)</span><span class="syntax-OPERATOR">)</span>
+<span class="syntax-KEYWORD1">then</span>
+        echo <span class="syntax-LITERAL1">&quot;</span><span class="syntax-LITERAL1">no</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">files</span><span class="syntax-LITERAL1"> </span><span class="syntax-LITERAL1">specified</span><span class="syntax-LITERAL1">&quot;</span>
+        exit
+<span class="syntax-KEYWORD1">fi</span>
+<span class="syntax-KEYWORD2">files</span><span class="syntax-OPERATOR">=</span><span class="syntax-KEYWORD2">$*</span>
+
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">combine</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">files</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">----------------------------------------------------------------</span>
+cat <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">files</span> <span class="syntax-OPERATOR">&gt;</span> <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">ofile</span>
+
+<span class="syntax-COMMENT1">#</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">compress</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">results</span><span class="syntax-COMMENT1"> </span><span class="syntax-COMMENT1">-------------------------------------------------------------</span>
+java -jar <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">yuipath</span> --type <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">type</span> -o <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">ofile</span> <span class="syntax-KEYWORD2">$</span><span class="syntax-KEYWORD2">ofile</span>
+
+</span></pre>
+<p>The usage is illustrated in the script itself but here are a few examples just to get you started:</p>
+<pre class="code">./yuicompress -o lib.js lib/js/*.js
+./yuicompress -o all.css -t css css/*.css
+./yuicompress -o some.css -t css css/main.css css/misc.css</pre>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D141&title=combine+%2B+compress'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D141&title=combine+%2B+compress'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=141
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>update maven on os x</title>
+			<link>http://01001111.net/code/?p=136</link>
+			<comments>http://01001111.net/code/?p=136#comments</comments>
+			<pubDate>Sun, 30 Aug 2009 01:11:31 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[java]]></category>
+			<category><![CDATA[os x]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=136</guid>
+			<description><![CDATA[Downloaded the latest version of Maven and don&#8217;t know what to do with all of those files?  Run this shell script (with sudo for the appropriate privileges) on the directory containing all of the maven files (usually called apache-maven-[version#]):
+mvnupdate.sh
+#check for directory argument --------------------------------------------------
+if [ $# -lt 1 ]
+then
+       [...]]]></description>
+			<content:encoded><![CDATA[<p>Downloaded the latest version of Maven and don&#8217;t know what to do with all of those files?  Run this shell script (with sudo for the appropriate privileges) on the directory containing all of the maven files (usually called apache-maven-[version#]):</p>
+<p>mvnupdate.sh</p>
+<pre class="code"><span class="syntax0"><span class="syntax1">#</span><span class="syntax1">check</span><span class="syntax1"> </span><span class="syntax1">for</span><span class="syntax1"> </span><span class="syntax1">directory</span><span class="syntax1"> </span><span class="syntax1">argument</span><span class="syntax1"> </span><span class="syntax1">--------------------------------------------------</span>
+<span class="syntax8">if</span> [ <span class="syntax9">$#</span> -lt <span class="syntax5">1</span> ]
+<span class="syntax8">then</span>
+        echo <span class="syntax13">&quot;</span><span class="syntax13">no</span><span class="syntax13"> </span><span class="syntax13">directory</span><span class="syntax13"> </span><span class="syntax13">name</span><span class="syntax13"> </span><span class="syntax13">specified</span><span class="syntax13">&quot;</span>
+        exit
+<span class="syntax8">fi</span>
+<span class="syntax1">#</span><span class="syntax1">check</span><span class="syntax1"> </span><span class="syntax1">directory</span><span class="syntax1"> </span><span class="syntax1">exists</span><span class="syntax1"> </span><span class="syntax1">--------------------------------------------------------</span>
+<span class="syntax8">if</span> <span class="syntax18">!</span> test -d <span class="syntax9">$</span><span class="syntax9">1</span>
+<span class="syntax8">then</span>
+        echo <span class="syntax13">&quot;</span><span class="syntax9">$</span><span class="syntax9">1</span><span class="syntax13"> </span><span class="syntax13">is</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">directory</span><span class="syntax13">&quot;</span>
+        exit
+<span class="syntax8">fi</span>
+<span class="syntax1">#</span><span class="syntax1">move</span><span class="syntax1"> </span><span class="syntax1">previous</span><span class="syntax1"> </span><span class="syntax1">version</span><span class="syntax1"> </span><span class="syntax1">---------------------------------------------------------</span>
+<span class="syntax9">MVN</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">usr</span><span class="syntax13">/</span><span class="syntax13">share</span><span class="syntax13">/</span><span class="syntax13">maven</span><span class="syntax13">&quot;</span>
+<span class="syntax9">oldMVN</span><span class="syntax18">=</span><span class="syntax9">$</span><span class="syntax9">MVN</span><span class="syntax10">`</span><span class="syntax10">date</span><span class="syntax10"> </span><span class="syntax10">+</span><span class="syntax10">&quot;</span><span class="syntax10">%</span><span class="syntax10">Y</span><span class="syntax10">%</span><span class="syntax10">m</span><span class="syntax10">%</span><span class="syntax10">d</span><span class="syntax10">%</span><span class="syntax10">H</span><span class="syntax10">%</span><span class="syntax10">M</span><span class="syntax10">%</span><span class="syntax10">S</span><span class="syntax10">&quot;</span><span class="syntax10">`</span>
+<span class="syntax8">if</span> test -d <span class="syntax9">$</span><span class="syntax9">MVN</span>
+<span class="syntax8">then</span>
+        sudo mv <span class="syntax9">$</span><span class="syntax9">MVN</span> <span class="syntax9">$</span><span class="syntax9">oldMVN</span>
+<span class="syntax8">fi</span>
+<span class="syntax1">#</span><span class="syntax1">move</span><span class="syntax1"> </span><span class="syntax1">new</span><span class="syntax1"> </span><span class="syntax1">version</span><span class="syntax1"> </span><span class="syntax1">--------------------------------------------------------------</span>
+sudo cp -r <span class="syntax9">$</span><span class="syntax9">1</span> <span class="syntax9">$</span><span class="syntax9">MVN</span>
+</span></pre>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D136&title=update+maven+on+os+x'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D136&title=update+maven+on+os+x'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=136
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>remove ugly outlines in Firefox</title>
+			<link>http://01001111.net/code/?p=133</link>
+			<comments>http://01001111.net/code/?p=133#comments</comments>
+			<pubDate>Tue, 18 Aug 2009 00:17:35 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[css]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=133</guid>
+			<description><![CDATA[You know those ugly outlines that Firefox puts around links and buttons when you click on them?  Yeah, I don&#8217;t get it either.  From a developer&#8217;s standpoint, IE is by far the worst browser to support but Firefox also has its share of baffling behaviors and deviations from the standards.
+So, how do you [...]]]></description>
+			<content:encoded><![CDATA[<p>You know those ugly outlines that Firefox puts around links and buttons when you click on them?  Yeah, I don&#8217;t get it either.  From a developer&#8217;s standpoint, IE is by far the worst browser to support but Firefox also has its share of baffling behaviors and deviations from the standards.</p>
+<p>So, how do you remove those ugly outlines from your site?  Add this to your style sheet and it <i>should</i> do the trick.</p>
+<pre class="code">*, *:hover, *:active, *:link { outline: none; }</pre>
+<p>It might be overkill but it takes care of most situations involving links.  Unfortunately there&#8217;s no easy way to get rid of the outlines around buttons that are styled with images but this at least minimizes the number of visual abominations.</p>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D133&title=remove+ugly+outlines+in+Firefox'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D133&title=remove+ugly+outlines+in+Firefox'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=133
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>JAWR</title>
+			<link>http://01001111.net/code/?p=122</link>
+			<comments>http://01001111.net/code/?p=122#comments</comments>
+			<pubDate>Sat, 01 Aug 2009 20:57:52 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[apache]]></category>
+			<category><![CDATA[css]]></category>
+			<category><![CDATA[html]]></category>
+			<category><![CDATA[java]]></category>
+			<category><![CDATA[javascript]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=122</guid>
+			<description><![CDATA[Recently I gave a presentation to colleagues on Jawr and the general merits of Javascript/CSS minification.  Most of the material was pilfered from the official Jawr site but it may be easier to digest for those of us with shorter attention spans.
+So, first an introduction:
+Jawr
+
+&#8220;Jawr is a tunable packaging solution for Javascript and CSS [...]]]></description>
+			<content:encoded><![CDATA[<p>Recently I gave a presentation to colleagues on Jawr and the general merits of Javascript/CSS minification.  Most of the material was pilfered from the <a href="https://jawr.dev.java.net/">official Jawr site</a> but it may be easier to digest for those of us with shorter attention spans.</p>
+<p>So, first an introduction:</p>
+<h2>Jawr</h2>
+<p style="text-align:center;"><img src="images/jawr/jawrlogo.png" /></p>
+<p><quote>&#8220;Jawr is a tunable packaging solution for Javascript and CSS which allows for rapid development of resources in separate module files. Developers can work with a large set of split javascript files in development mode, then Jawr bundles all together into one or several files in a configurable way.&#8221;</quote></p>
+<p>And why should we care about any of this?  Before answering this question, let&#39;s step back for a moment and discuss an important concept in web application development:</p>
+<h2>Minification</h2>
+<p> Minification (n), also called minimization, or minimisation (for those who speake the Queen&#39;s English):  the process of removing all unnecessary characters from code without altering its functionality.  This typically includes all non-critical whitespace and newlines that are not included in string literals and most comments.</p>
+<p> Verb form: minify.</p>
+<h2>Why minify (and bundle)?</h2>
+<h4>‚Ä¢ Improves load times for the client</h4>
+<h4>‚Ä¢ Less data being transmitted by the server</h4>
+<h2>How?</h2>
+<h4>‚Ä¢ Minification reduces the size of HTTP responses.</h4>
+<p> Why should we be sending unnecessary data?  The spaces, tabs, and newlines are valuable only in development so we should keep them to ourselves.</p>
+<h4>‚Ä¢ Bundling reduces the number of HTTP requests.</h4>
+<p> The HTTP protocol is fairly inefficient when it comes to retrieving lots of files.  First a TCP connection must be established.  This requires a three-way handshake.   The client sends a connection request, the server responds, and then the client acknowledges the response.</p>
+<p>Now the client sends the HTTP request itself.  HTTP, Hypertext Transfer Protocol, is, as the name indicates, a text based protocol with all information being sent as human readable text.  This means that the speed, small size, and efficiency of a rigid bit and byte based based protocol are sacrificed in favor of versatility and comprehensibility.</p>
+<p>I&#39;m not going to get into the details of the TCP/IP stack and talk about maximum transmission units or fragmentation but, for those of you unfamiliar with the specifics, I&#39;ll just stress that there&#39;s even more overhead in the transmission of these bloated requests and responses in addition to the initial handshake and large, text -based headers.</p>
+<p>The response, with a larger set of headers, comes back from the server and, if this is an HTML document, the client begins sending requests for the other documents referenced therein.  This includes scripts, style sheets, and pictures.  All browsers have a limit on the number of concurrent connections allowed to a single domain per page and for a while this was a whopping 2 (this is still effectively the case for IE).  Additionally, unless the Keep Alive flag is set, each request requires a new TCP connection to be negotiated.</p>
+<p>Multiple script files, which halt the execution of the page due to the assumed requirement that they be loaded and executed in order, will make initial page load times uncomfortably long unless the files are cached.  Therefore, reducing the number of files that need to be downloaded means fewer HTTP requests resulting in faster load times.</p>
+<h2>And why should we care about load times?</h2>
+<h4>‚Ä¢ Web applications and the culture of instant gratification</h4>
+<p> If we, as web application developers, truly want to compete with desktop applications then we strive to match their responsiveness.  This is why the whole AJAX paradigm has become such a phenomenon  (and poorly misused buzzword) over these past four years.  When we perform an action within the context of a web page, we don&#39;t want to wait ages while the screen reloads.  Even in cases where a full page transition is necessary, slow load times can mean the death of a project where alternatives are available.</p>
+<h4>‚Ä¢ Mobile browsers</h4>
+<p> My iPhone is faster and has more storage space than the iMac I bought back  in 1999 and a much better downstream than the 56K modem bundled within.  It weighs as much as my wallet and enables me to check my email from places where laptops are socially forbidden.  Mobile browsing is becoming ever more prevalent and it would be a serious mistake on the part of any web application developer to neglect making optimizations for their sake.</p>
+<h4>‚Ä¢ Some people still use dial-up</h4>
+<p> &#8230;and some people still use AOL&#8230; and a lot of people still use IE.  Strange, I know, particularly the last point, but whatever the reason for the circumstances may be, they may not have a choice but we certainly do have the choice to optimize.</p>
+<h2>So why don&#39;t we just use one big script file and one big style file?</h2>
+<h4>‚Ä¢ Development is much more efficient when using multiple, logically separated files and good organization is integral to good programming.</h4>
+<p> Editing or debugging large script files is a nightmare.  Editing or debugging large, minified script files is impossible.</p>
+<h4>‚Ä¢ Some components need to be included on every page whereas other components or groups of components need to be included in particular sections of the site.</h4>
+<p> Optimization doesn&#39;t mean simply getting rid of meaningless text, it also means excluding useless code.  If I have an admin section of a site and a client section of a site, there is no need whatsoever for scripts specific to the admin to be sent to the client and vice-versa.  In the case of styles, there could be CSS conflicts between these two sections so we certainly wouldn&#39;t want to bundle section specific stylesheets together.</p>
+<h2>Other options</h2>
+<p> ‚Ä¢ YUI compressor (no grouping) (http://developer.yahoo.com/yui/compressor/) Java app, minify and compress.<br />
+    ‚Ä¢ Minify (PHP) http://code.google.com/p/minify/</p>
+<h2>Jawr</h2>
+<p> ‚Ä¢ Minifies<br />
+    ‚Ä¢ Munges<br />
+    ‚Ä¢ Bundles<br />
+    ‚Ä¢ Compresses<br />
+    ‚Ä¢ Enforces Caching<br />
+    ‚Ä¢ Does all this on demand<br />
+    ‚Ä¢ Has debug and production modes<br />
+    ‚Ä¢¬†Built in JSP tag library for including the scripts and styles</p>
+<h2>Additionally</h2>
+<p> ‚Ä¢ Free and open source<br />
+    ‚Ä¢ Easy to set up<br />
+    ‚Ä¢ Easy to configure<br />
+    ‚Ä¢¬†Plays nice with others (Spring MVC, JSF/Facelets, Grails, pure HTML)</p>
+<h2>Setup (web.xml)</h2>
+<p style="text-align:center;"><a href="images/jawr/web.xml.png"><img src="images/jawr/thumb/web.xml.png" /></a></p>
+<h2>Setup (jawr.properties)</h2>
+<p style="text-align:center;"><a href="images/jawr/jawr.properties.png"><img src="images/jawr/thumb/jawr.properties.png" /></a></p>
+<h2>Setup (JSP)</h2>
+<p style="text-align:center;"><a href="images/jawr/default.jsp.png"><img src="images/jawr/thumb/default.jsp.png" /></a></p>
+<h2>Result (debug)</h2>
+<p style="text-align:center;"><a href="images/jawr/jawr-debug.html.png"><img src="images/jawr/thumb/jawr-debug.html.png" /></a></p>
+<h2>Result (production)</h2>
+<p style="text-align:center;"><a href="images/jawr/default.jsp.png"><img src="images/jawr/thumb/default.jsp.png" /></a></p>
+<h2>File Sizes</h2>
+<pre>
+     16532 autocomplete.js
+      1176 binder.js
+       367 console-noop.js
+      1617 effects-ext.js
+     38986 effects.js
+      1543 form-highlighter.js
+     11809 global.js
+       822 modalbox-ext.js
+     22778 modalbox.js
+      2625 prototype-ext.js
+    124000 prototype.js
+
+    <b>All files</b>
+        244 KB
+
+    <b>core.js (minified and bundled)</b>
+        156 KB
+
+    <b>core.js (minified, bundled, and gzipped)</b>
+        40 KB
+</pre>
+<h2>Load times (in debug mode)</h2>
+<p style="text-align:center;"><a href="images/jawr/loadtime-debugmode.png"><img src="images/jawr/thumb/loadtime-debugmode.png" /></a></p>
+<h2>Load times (in production mode)</h2>
+<p style="text-align:center;"><a href="images/jawr/loadtime-prodmode.png"><img src="images/jawr/thumb/loadtime-prodmode.png" /></a></p>
+<h2>Load times (with caching)</h2>
+<p style="text-align:center;"><a href="images/jawr/loadtime-cached.png"><img src="images/jawr/thumb/loadtime-cached.png" /></a></p>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D122&title=JAWR'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D122&title=JAWR'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=122
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>utf8 string manipulation in PHP</title>
+			<link>http://01001111.net/code/?p=120</link>
+			<comments>http://01001111.net/code/?p=120#comments</comments>
+			<pubDate>Sun, 21 Jun 2009 23:45:35 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[php]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=120</guid>
+			<description><![CDATA[Trying to import a load of UTF8 encoded data into a database or send it across a socket using PHP?  Do you need to alter the data first using the built in string manipulation functions? 
+Functions such as utf8_encode won&#8221;t help you if the data you have is already utf8 encoded.  For an [...]]]></description>
+			<content:encoded><![CDATA[<p>Trying to import a load of UTF8 encoded data into a database or send it across a socket using PHP?  Do you need to alter the data first using the built in string manipulation functions? </p>
+<p>Functions such as utf8_encode won&#8221;t help you if the data you have is already utf8 encoded.  For an isolated set of cases, the <a href="http://us2.php.net/manual/en/ref.mbstring.php">Multibyte String Functions</a> will allow you to safely manipulate the encoded data but they must be explicitly called.  This means another set of functions to memorize or, at the very least, look up repeatedly at php.net because, as can be expected, there is no direct mapping between the regular string functions and the multibyte string functions.</p>
+<p>So, what if you want to use those regular, well-memorized string functions instead?  Include the following and you should be set:</p>
+<pre class="code">mb_internal_encoding("UTF-8");</pre>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D120&title=utf8+string+manipulation+in+PHP'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D120&title=utf8+string+manipulation+in+PHP'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=120
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>installing the mysql ruby gem in os x (10.5)</title>
+			<link>http://01001111.net/code/?p=116</link>
+			<comments>http://01001111.net/code/?p=116#comments</comments>
+			<pubDate>Fri, 08 May 2009 10:55:18 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[mysql]]></category>
+			<category><![CDATA[os x]]></category>
+			<category><![CDATA[ruby]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=116</guid>
+			<description><![CDATA[Installing the MySQL ruby gem can be quite a pain but, by following these few steps in order, you might be fortunate enough to bypass the frustrating problems.
+
+Install the os x developer tools
+Install the 32 bit edition of MySQL.
+
+sudo gem update --system
+
+
+sudo env ARCHFLAGS="-arch i386" gem install mysql --
+        --with-mysql-config=/usr/local/mysql/bin/mysql_config
+
+
+]]></description>
+			<content:encoded><![CDATA[<p>Installing the MySQL ruby gem can be quite a pain but, by following these few steps in order, you might be fortunate enough to bypass the frustrating problems.</p>
+<ol>
+<li>Install the os x developer tools</li>
+<li>Install the <b>32 bit</b> edition of MySQL.</li>
+<li>
+<pre class="code">sudo gem update --system</pre>
+</li>
+<li>
+<pre class="code">sudo env ARCHFLAGS="-arch i386" gem install mysql --
+        --with-mysql-config=/usr/local/mysql/bin/mysql_config</pre>
+</li>
+</ol>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D116&title=installing+the+mysql+ruby+gem+in+os+x+%2810.5%29'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D116&title=installing+the+mysql+ruby+gem+in+os+x+%2810.5%29'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=116
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>running shell scripts in automator</title>
+			<link>http://01001111.net/code/?p=105</link>
+			<comments>http://01001111.net/code/?p=105#comments</comments>
+			<pubDate>Mon, 04 May 2009 01:23:06 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[os x]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=105</guid>
+			<description><![CDATA[I am an avid Mac user, that&#8217;s no secret.  I also like to make my daily life more efficient by scripting repetitive tasks.  Again, no secret.  As such, I have a complicated relationship with Apple&#8217;s Automator.  With the ability to execute tasks with a single right/ctrl-click and some minor navigation through [...]]]></description>
+			<content:encoded><![CDATA[<p>I am an avid Mac user, that&#8217;s no secret.  I also like to make my daily life more efficient by scripting repetitive tasks.  Again, no secret.  As such, I have a complicated relationship with Apple&#8217;s Automator.  With the ability to execute tasks with a single right/ctrl-click and some minor navigation through a contextual menu, there&#8217;s no denying the power and utility of this feature. I&#8217;ve compiled many Automator actions to take care of oft-repeated tasks but have occasionally spent entirely too long trying to debug a workflow that should be simple but, given the nature of the limited / limiting drag and drop interface, turned out to be annoyingly complex.</p>
+<p>Anyone who had dealt with assigning and using multiple variables in a workflow knows how incredibly frustrating a task it can be.  Now, I don&#8217;t read documentation much.  I&#8217;m often far too eager to get to work to bother with a manual but perhaps I would have seen this gem earlier if I hadn&#8217;t rushed into the world of Automator unprepared:</p>
+<p style="text-align:center;"><img src="http://i34.photobucket.com/albums/d117/01001111/ssaa.jpg" style=" border:solid #808080 1px;padding:3px;"/></p>
+<p>You can run shell scripts in Automator, that&#8217;s all you need to know.  Select some files/directories in the Finder, ctrl-click, select the script, and off you go.  Sure beats dealing with paths, setting up aliases, and typing out long arguments in the command-line.</p>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D105&title=running+shell+scripts+in+automator'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D105&title=running+shell+scripts+in+automator'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=105
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>activating php in os x (10.5)</title>
+			<link>http://01001111.net/code/?p=100</link>
+			<comments>http://01001111.net/code/?p=100#comments</comments>
+			<pubDate>Thu, 23 Apr 2009 12:10:21 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[os x]]></category>
+			<category><![CDATA[php]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=100</guid>
+			<description><![CDATA[Following the Apache setup for OS X 10.5 in the previous post, one may want to activate the already-present php installation.
+cd /private/etc/apache2
+sudo pico httpd.conf
+Now, uncomment the following line:
+#LoadModule php5_module      libexec/apache2/libphp5.so
+&#8595;
+LoadModule php5_module      libexec/apache2/libphp5.so
+Now we need to make sure the php.ini file is present by copying the [...]]]></description>
+			<content:encoded><![CDATA[<p>Following the Apache setup for OS X 10.5 in the previous post, one may want to activate the already-present php installation.</p>
+<pre class="code">cd /private/etc/apache2
+sudo pico httpd.conf</pre>
+<p>Now, uncomment the following line:</p>
+<pre class="code">#LoadModule php5_module      libexec/apache2/libphp5.so</pre>
+<div class="center">&darr;</div>
+<pre class="code">LoadModule php5_module      libexec/apache2/libphp5.so</pre>
+<p>Now we need to make sure the php.ini file is present by copying the php.ini.default file.</p>
+<pre class="code">cd /private/etc
+sudo cp php.ini.default php.ini</pre>
+<p>You can also use this shell script to accomplish the task:</p>
+<p>activatephp.sh</p>
+<pre class="code"><span class="syntax0"><span class="syntax2">#!</span><span class="syntax2">/bin/bash</span>
+<span class="syntax1">#</span><span class="syntax1">-activatephp.sh-#</span>
+<span class="syntax1">#</span><span class="syntax1">httpd.conf</span><span class="syntax1"> </span><span class="syntax1">--------------------------------------------------------------------</span>
+<span class="syntax9">HTTPD</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">private</span><span class="syntax13">/</span><span class="syntax13">etc</span><span class="syntax13">/</span><span class="syntax13">apache2</span><span class="syntax13">/</span><span class="syntax13">httpd</span><span class="syntax13">.</span><span class="syntax13">conf</span><span class="syntax13">&quot;</span>
+sudo cp <span class="syntax9">$</span><span class="syntax9">HTTPD</span> <span class="syntax13">&quot;</span><span class="syntax9">$</span><span class="syntax9">HTTPD</span><span class="syntax13">.</span><span class="syntax13">old</span><span class="syntax13">&quot;</span>
+
+<span class="syntax9">PHPMOD</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">LoadModule</span><span class="syntax13"> </span><span class="syntax13">php5_module</span><span class="syntax13">&quot;</span>
+sudo sed s/<span class="syntax13">&quot;</span><span class="syntax13">#</span><span class="syntax9">$</span><span class="syntax9">PHPMOD</span><span class="syntax13">&quot;</span>/<span class="syntax13">&quot;</span><span class="syntax9">$</span><span class="syntax9">PHPMOD</span><span class="syntax13">&quot;</span>/g <span class="syntax13">&quot;</span><span class="syntax9">$</span><span class="syntax9">HTTPD</span><span class="syntax13">.</span><span class="syntax13">old</span><span class="syntax13">&quot;</span> <span class="syntax18">&gt;</span> <span class="syntax9">$</span><span class="syntax9">HTTPD</span>
+
+<span class="syntax1">#</span><span class="syntax1">php.ini</span><span class="syntax1"> </span><span class="syntax1">-----------------------------------------------------------------------</span>
+<span class="syntax9">PHPINI</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">private</span><span class="syntax13">/</span><span class="syntax13">etc</span><span class="syntax13">/</span><span class="syntax13">php</span><span class="syntax13">.</span><span class="syntax13">ini</span><span class="syntax13">&quot;</span>
+sudo cp <span class="syntax13">&quot;</span><span class="syntax9">$</span><span class="syntax9">PHPINI</span><span class="syntax13">.</span><span class="syntax13">default</span><span class="syntax13">&quot;</span> <span class="syntax9">$</span><span class="syntax9">PHPINI</span>
+</span></pre>
+<p>Copy the text into a file called activatephp.sh and run it as follows:</p>
+<pre class="code">sudo ./activatephp.sh</pre>
+<p>Alter the php.ini file if needed or copy your own pre-configured php.ini file into  /private/etc instead.</p>
+<p>Restart Apache through the Sharing preference pane (again, to avoid accidentally starting conflicting instances).</p>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D100&title=activating+php+in+os+x+%2810.5%29'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D100&title=activating+php+in+os+x+%2810.5%29'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=100
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+		<item>
+			<title>enabling apache in os x (10.5)</title>
+			<link>http://01001111.net/code/?p=92</link>
+			<comments>http://01001111.net/code/?p=92#comments</comments>
+			<pubDate>Wed, 22 Apr 2009 11:12:48 +0000</pubDate>
+			<dc:creator>01001111</dc:creator>
+			<category><![CDATA[apache]]></category>
+			<category><![CDATA[os x]]></category>
+
+			<guid isPermaLink="false">http://01001111.net/code/?p=92</guid>
+			<description><![CDATA[The modern day Mac OS comes with a plethora of great tools pre-installed and (typically) pre-configured to run.  From an SVN client to a GCC compiler to Ruby on Rails, there are precious few necessities a typical developer won&#8217;t find tucked away in the Terminal upon first boot.
+Apache has been bundled with OS X [...]]]></description>
+			<content:encoded><![CDATA[<p>The modern day Mac OS comes with a plethora of great tools pre-installed and (typically) pre-configured to run.  From an SVN client to a GCC compiler to Ruby on Rails, there are precious few necessities a typical developer won&#8217;t find tucked away in the Terminal upon first boot.</p>
+<p>Apache has been bundled with OS X since 10.0 and there&#8217;s even a way to enable it using the System Preferences through the Sharing preference pane&#8230; or at least that&#8217;s how it should work.</p>
+<p>Recently I needed to enable a web server on a new MacBook Pro.  Apparently checking the Web Sharing box in the Sharing preference pane isn&#8217;t enough.  Now I think I ran into this problem long ago but I forgot the steps involved.  So, for my own records at the very least, here is how you enable apache in OS X (10.5):</p>
+<p>NOTE: I&#8217;m comfortable with pico as my quick text-editing terminal app.  Use whatever you prefer.</p>
+<p>For all accounts:</p>
+<pre class="code">
+cd /private/etc/apache2/users
+sudo pico local.conf
+
+&lt;Directory "/Users/*/Sites/"&gt;
+    Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;
+</pre>
+<p>For a specific user (called USER in this example) account:</p>
+<pre class="code">
+cd /private/etc/apache2/users
+sudo pico USER.conf
+
+&lt;Directory "/Users/USER/Sites/"&gt;
+    Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;
+</pre>
+<p>Here&#8217;s a shell script I wrote to take care of it:</p>
+<p>enableapache.sh</p>
+<pre class="code"><span class="syntax0"><span class="syntax2">#!</span><span class="syntax2">/bin/bash</span>
+<span class="syntax1">#</span><span class="syntax1">-enableapache.sh-#</span>
+<span class="syntax8">if</span> [ <span class="syntax9">$#</span> -gt <span class="syntax5">0</span> ]
+<span class="syntax8">then</span>
+        <span class="syntax9">FILE</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax9">$</span><span class="syntax9">1</span><span class="syntax13">.</span><span class="syntax13">conf</span><span class="syntax13">&quot;</span>
+        <span class="syntax9">USER</span><span class="syntax18">=</span><span class="syntax9">$</span><span class="syntax9">1</span>
+<span class="syntax8">else</span>
+        <span class="syntax9">FILE</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">local</span><span class="syntax13">.</span><span class="syntax13">conf</span><span class="syntax13">&quot;</span>
+        <span class="syntax9">USER</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">*</span><span class="syntax13">&quot;</span>
+<span class="syntax8">fi</span>
+
+sudo echo <span class="syntax13">&quot;</span><span class="syntax13">&lt;</span><span class="syntax13">Directory</span><span class="syntax13"> </span><span class="syntax13">\&quot;</span><span class="syntax13">/</span><span class="syntax13">Users</span><span class="syntax13">/</span><span class="syntax9">$</span><span class="syntax9">USER</span><span class="syntax13">/</span><span class="syntax13">Sites</span><span class="syntax13">/</span><span class="syntax13">\&quot;</span><span class="syntax13">&gt;</span>
+<span class="syntax13">        </span><span class="syntax13">Options</span><span class="syntax13"> </span><span class="syntax13">Indexes</span><span class="syntax13"> </span><span class="syntax13">MultiViews</span>
+<span class="syntax13">        </span><span class="syntax13">AllowOverride</span><span class="syntax13"> </span><span class="syntax13">None</span>
+<span class="syntax13">        </span><span class="syntax13">Order</span><span class="syntax13"> </span><span class="syntax13">allow</span><span class="syntax13">,</span><span class="syntax13">deny</span>
+<span class="syntax13">        </span><span class="syntax13">Allow</span><span class="syntax13"> </span><span class="syntax13">from</span><span class="syntax13"> </span><span class="syntax13">all</span>
+<span class="syntax13">&lt;</span><span class="syntax13">/</span><span class="syntax13">Directory</span><span class="syntax13">&gt;</span><span class="syntax13">&quot;</span> <span class="syntax18">&gt;</span> <span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">private</span><span class="syntax13">/</span><span class="syntax13">etc</span><span class="syntax13">/</span><span class="syntax13">apache2</span><span class="syntax13">/</span><span class="syntax13">users</span><span class="syntax13">/</span><span class="syntax9">$</span><span class="syntax9">FILE</span><span class="syntax13">&quot;</span>
+</span></pre>
+<p>Copy the text into a file called enableapache.sh and run it as follows:</p>
+<pre class="code">
+sudo ./enableapache.sh      (for all accounts)
+sudo ./enableapache.sh USER (for a specific user called USER)
+</pre>
+<p>Now restart Apache using the Sharing preference pane.  Doing so through the command line could result in two instances of Apache trying to run simultaneously.</p>
+<div class='s0cial_submit'><a class='DiggThisButton' href='http://digg.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D92&title=enabling+apache+in+os+x+%2810.5%29'><img src='http://digg.com/img/diggThisCompact.png' alt='DiggThis' /></a><a class='RedditButton' href='http://www.reddit.com/submit?url=http%3A%2F%2F01001111.net%2Fcode%2F%3Fp%3D92&title=enabling+apache+in+os+x+%2810.5%29'><img src='http://www.reddit.com/static/spreddit7.gif' alt='submit to reddit' /></a></div>]]></content:encoded>
+			<wfw:commentRss>http://01001111.net/code/?feed=rss2&amp;p=92
+			</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
