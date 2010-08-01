@@ -8,4 +8,5 @@ class FeedEntry:
 	title = ''
 	date = ''
 	link = ''
+	author = ''
 	content = ''

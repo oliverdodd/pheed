@@ -18,9 +18,7 @@ class AtomReader (FeedReader):
 		root = feeds[0]
 		feed = Feed()
 		feed.title = root.tagValue("title")
-		urlTag = root.tagWithAttribute("link","rel","alternate")
-		if (urlTag):
-			feed.url = urlTag.getAttribute("href")
+		feed.url = root.getElementWithAttribute("link","rel","alternate").getAttribute("href")
 		feed.entries = self.parseEntries(document.getElementsByTagName("entry"))
 		return feed
 
@@ -28,9 +26,8 @@ class AtomReader (FeedReader):
 		entry = FeedEntry()
 		entry.title = entryNode.tagValue("title")
 		entry.date = parser.parse(entryNode.tagValue("published"))
-		linkTag = entryNode.tagWithAttribute("link","rel","alternate")
-		if (linkTag):
-			entry.link = linkTag.getAttribute("href")
+		entry.link = entryNode.getElementWithAttribute("link","rel","alternate").getAttribute("href")
+		entry.author = entryNode.getElementByTagName("author").tagValue("name")
 		entry.content = entryNode.tagValue("content")
 		return entry
 	
