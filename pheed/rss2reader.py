@@ -12,9 +12,6 @@ from pheed.feedreader import FeedReader
 
 class RSS2Reader (FeedReader):
 	
-	#Wed, 19 May 2010 02:16:52 +0000
-	dateFormat = "%a, %d %b %Y %H:%M:%S %z"
-	
 	def parseDocument(self,document,limit=None):
 		root = document.getElementByTagName("rss").getElementByTagName("channel")
 		if root.tagName == None:
