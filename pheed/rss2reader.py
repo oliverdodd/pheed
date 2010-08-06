@@ -19,7 +19,7 @@ class RSS2Reader (FeedReader):
 		feed = Feed()
 		feed.title = root.tagValue("title")
 		feed.url = root.tagValue("link")
-		feed.entries = self.parseEntries(document.getElementsByTagName("item"))
+		feed.entries = self.parseEntries(document.getElementsByTagName("item"),limit)
 		return feed
 	
 	def parseEntry(self,entryNode):

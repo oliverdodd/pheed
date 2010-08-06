@@ -18,7 +18,7 @@ class AtomReader (FeedReader):
 		feed = Feed()
 		feed.title = root.tagValue("title")
 		feed.url = root.getElementWithAttribute("link","rel","alternate").getAttribute("href")
-		feed.entries = self.parseEntries(document.getElementsByTagName("entry"))
+		feed.entries = self.parseEntries(document.getElementsByTagName("entry"),limit)
 		return feed
 
 	def parseEntry(self,entryNode):
