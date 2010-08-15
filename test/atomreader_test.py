@@ -1,5 +1,3 @@
-import xml.dom.minidom
-import pheed.domelement
 from pheed.atomreader import AtomReader
 import unittest
 

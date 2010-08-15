@@ -1,5 +1,3 @@
-import xml.dom.minidom
-import pheed.domelement
 from pheed.rss2reader import RSS2Reader
 import unittest
 

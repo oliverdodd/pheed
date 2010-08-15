@@ -8,9 +8,9 @@ from dateutil import parser
 from pheed import domelement
 from pheed.feed import Feed
 from pheed.feedentry import FeedEntry
-from pheed.feedreader import FeedReader
+from pheed.abstractfeedreader import AbstractFeedReader
 
-class RSS2Reader (FeedReader):
+class RSS2Reader (AbstractFeedReader):
 	
 	def parseDocument(self,document,limit=None):
 		root = document.getElementByTagName("rss").getElementByTagName("channel")

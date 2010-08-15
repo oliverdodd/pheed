@@ -3,4 +3,4 @@
 
 	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 """
-__all__ = ["domelement", "feed", "feedentry", "feedreader", "atomreader", "rss2reader"]
+__all__ = ["domelement", "feed", "feedentry", "abstractfeedreader", "atomreader", "rss2reader", "feedreader"]

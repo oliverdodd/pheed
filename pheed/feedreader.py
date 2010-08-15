@@ -1,37 +1,32 @@
-"""	FeedReader Class - Read a subset of information from RSS and Atom feeds
+"""	FeedReader Class - Autodectect and read a subset of information from and RSS2 or Atom feed
 	Copyright (c) 2010 Oliver C Dodd
 	
 	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
 """
-import urllib2
-import xml.dom.minidom
 from pheed import domelement
+from pheed.feed import Feed
+from pheed.feedentry import FeedEntry
+from pheed.abstractfeedreader import AbstractFeedReader
+from pheed.atomreader import AtomReader
+from pheed.rss2reader import RSS2Reader
 
-class FeedReader:
+class FeedReader (AbstractFeedReader):
 	
-	def fetch(self,url):
-		""" Fake FeedBurner user agent to bypass feedburner redirection """
-		req = urllib2.Request(url,headers = {'User-Agent' : 'FeedBurner/1.0 (http://www.FeedBurner.com)'})
-		return urllib2.urlopen(req)
-		
-	def load(self,url,limit=None):
-		return self.parse(self.fetch(url),limit)
+	reader = None
+	
+	def getReader(self,document):
+		# atom ?
+		if document.getElementByTagName("feed").tagName:
+			return AtomReader()
+		# rss2?
+		elif document.getElementByTagName("rss").tagName:
+			return RSS2Reader()
+		return None
 
-	def parse(self,handle,limit=None):
-		return self.parseDocument(xml.dom.minidom.parse(handle),limit)
-	
-	def parseString(self,xmlString,limit=None):
-		return self.parseDocument(xml.dom.minidom.parseString(xmlString),limit)
-	
-	def parseDocument(self,document,limit=None): abstract
-	
-	def parseEntries(self,entryNodes,limit=None,feed=None):
-		entries = []
-		i = 0
-		for e in entryNodes:
-			if (limit != None) and (i >= limit):
-				break
-			entries.append(self.parseEntry(e,feed))
-			i += 1
-		return entries
+	def parseDocument(self,document,limit=None):
+		self.reader = self.getReader(document)
+		return self.reader.parseDocument(document,limit)
+
+	def parseEntry(self,entryNode,feed=None):
+		return self.reader.parseEntry(entryNode,feed)
 	
