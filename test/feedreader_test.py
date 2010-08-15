@@ -5,7 +5,7 @@ from pheed.rss2reader import RSS2Reader
 from pheed.feedreader import FeedReader
 import unittest
 
-class atomreader_test(unittest.TestCase):
+class feedreader_test(unittest.TestCase):
 	
 	def test_getReader_atom(self):
 		r = FeedReader()
