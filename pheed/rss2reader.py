@@ -19,13 +19,14 @@ class RSS2Reader (FeedReader):
 		feed = Feed()
 		feed.title = root.tagValue("title")
 		feed.url = root.tagValue("link")
-		feed.entries = self.parseEntries(document.getElementsByTagName("item"),limit)
+		feed.entries = self.parseEntries(document.getElementsByTagName("item"),limit,feed)
 		return feed
 	
-	def parseEntry(self,entryNode):
+	def parseEntry(self,entryNode,feed=None):
 		entry = FeedEntry()
 		entry.title = entryNode.tagValue("title")
 		entry.date = parser.parse(entryNode.tagValue("pubDate"))
 		entry.link = entryNode.tagValue("link")
 		entry.content = entryNode.tagValue("description")
+		entry.feed = feed
 		return entry

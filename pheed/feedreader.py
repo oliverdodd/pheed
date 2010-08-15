@@ -25,13 +25,13 @@ class FeedReader:
 	
 	def parseDocument(self,document,limit=None): abstract
 	
-	def parseEntries(self,entryNodes,limit=None):
+	def parseEntries(self,entryNodes,limit=None,feed=None):
 		entries = []
 		i = 0
 		for e in entryNodes:
 			if (limit != None) and (i >= limit):
 				break
-			entries.append(self.parseEntry(e))
+			entries.append(self.parseEntry(e,feed))
 			i += 1
 		return entries
 	
