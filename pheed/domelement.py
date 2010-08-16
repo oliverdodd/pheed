@@ -1,7 +1,7 @@
+""" Extend DOM Element and DOM Document
+"""
 import xml.dom.minidom
-"""
-Extend DOM Element and DOM Document
-"""
+
 def textValue(self):
 	return "".join([e.nodeValue for e in self.childNodes])
 xml.dom.minidom.Element.textValue = textValue

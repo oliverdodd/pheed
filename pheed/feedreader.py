@@ -1,7 +1,4 @@
-"""	FeedReader Class - Autodectect and read a subset of information from and RSS2 or Atom feed
-	Copyright (c) 2010 Oliver C Dodd
-	
-	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+"""	FeedReader Class - Autodectect and read a subset of information from an RSS2 or Atom feed
 """
 from pheed import domelement
 from pheed.feed import Feed

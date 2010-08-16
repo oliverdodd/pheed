@@ -1,7 +1,4 @@
-"""	AbstractFeedReader Class - Read a subset of information from a feed
-	Copyright (c) 2010 Oliver C Dodd
-	
-	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+"""	AbstractFeedReader Class - read a subset of information from a feed
 """
 import urllib2
 import xml.dom.minidom

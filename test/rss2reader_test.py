@@ -20,7 +20,7 @@ class rss2reader_test(unittest.TestCase):
 		self.assertEqual(feed.entries[0].title, "Synchronous NSTask")
 		self.assertEqual(feed.entries[0].date.isoformat(), "2010-05-19T02:16:52+00:00")
 		self.assertEqual(feed.entries[0].link, "http://01001111.net/code/?p=159")
-		self.assertEqual(feed.entries[0].content[:89], "The NSTask class allows developers to run another program from within a Cocoa Application")
+		self.assertEqual(feed.entries[0].content[:109], "<p>The <strong>NSTask</strong> class allows developers to run another program from within a Cocoa Application")
 	
 	def test_parse_limit(self):
 		feed = self.rss2Reader.parse(self.file,5)

@@ -1,7 +1,4 @@
-"""	RSS2Reader Class - Read a subset of information from RSS and Atom feeds
-	Copyright (c) 2010 Oliver C Dodd
-	
-	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+"""	RSS2Reader - read a subset of information from an RSS2 feed
 """
 from datetime import datetime
 from dateutil import parser
@@ -27,6 +24,6 @@ class RSS2Reader (AbstractFeedReader):
 		entry.title = entryNode.tagValue("title")
 		entry.date = parser.parse(entryNode.tagValue("pubDate"))
 		entry.link = entryNode.tagValue("link")
-		entry.content = entryNode.tagValue("description")
+		entry.content = entryNode.tagValue("content:encoded")
 		entry.feed = feed
 		return entry

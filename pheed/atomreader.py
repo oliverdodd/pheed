@@ -1,6 +1,4 @@
-"""	AtomReader
-	Copyright (c) 2010 Oliver C Dodd
-	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+"""	AtomReader - read a subset of information from an atom feed
 """
 from datetime import datetime
 from dateutil import parser

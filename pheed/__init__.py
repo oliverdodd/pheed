@@ -1,6 +1,3 @@
-"""	Pheed Module - Read Atom and RSS2 feeds
- 	Copyright (c) 2010 Oliver C Dodd
-
-	Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+"""	Pheed Module - read Atom and RSS2 feeds
 """
 __all__ = ["domelement", "feed", "feedentry", "abstractfeedreader", "atomreader", "rss2reader", "feedreader"]
